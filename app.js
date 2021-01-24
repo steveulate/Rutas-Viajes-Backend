@@ -3,7 +3,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var indexRouter = require('./routes/index');
 var DriverRouter = require('./routes/driver');
-
+var UserRouter = require('./routes/user');
 
 
 var logger = require('morgan');
@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 });
 app.use('/', indexRouter);
 app.use('/driver', DriverRouter);
-
+app.use('/user', UserRouter);
 
 
 module.exports = app;
