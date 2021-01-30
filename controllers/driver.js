@@ -11,7 +11,7 @@ exports.addDriver = async (req) => {
             .input('telefono', sql.VarChar(10), req.telefono)
             .input('correo', sql.VarChar(100), req.correo)
             .input('contrasena', sql.VarChar(30), req.contrasena)
-            .input('isActive', sql.Bit, req.isActive)
+            .input('isActive', sql.Bit, 1)
             .output('success', sql.Bit, 0)
             .execute('addDriver');
         sql.close();
