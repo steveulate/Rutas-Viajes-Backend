@@ -5,7 +5,7 @@ var indexRouter = require('./routes/index');
 var DriverRouter = require('./routes/driver');
 var UserRouter = require('./routes/user');
 var RouteRouter = require('./routes/route');
-
+var StopRouter = require('./routes/stop');
 var logger = require('morgan');
 
 var app = express();
@@ -27,5 +27,5 @@ app.use('/', indexRouter);
 app.use('/driver', DriverRouter);
 app.use('/user', UserRouter);
 app.use('/route', RouteRouter);
-
+app.use('/stop', StopRouter);
 module.exports = app;

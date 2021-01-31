@@ -1,17 +1,17 @@
 var express = require('express');
 var router = express.Router();
-const RouteController = require('../controllers/route');
+const StopController = require('../controllers/stop');
 var HttpStatus = require('http-status-codes');
 
 
 router.post('/', (req, res) => {
-    RouteController.addRoute(req.body)
+    StopController.addStop(req.body)
         .then(result => { 
             if (result.output.success){
-                res.status(200).json(result.recordset[0]);
+                res.sendStatus(204);
             }
             else
-                res.status(400).json({ error: 'Error al agregar la Ruta' });
+                res.status(400).json({ error: 'Error al agregar la parada' });
         })
         .catch(err => {
             res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ error: err.message });
@@ -20,13 +20,13 @@ router.post('/', (req, res) => {
 
 
 router.get('/', (req, res) => {
-    RouteController.getRoutes(req.query)
+    StopController.getStops(req.query)
         .then(result => {
             if (result.recordset != null){
-                res.status(200).json({ routes: result.recordset });
+                res.status(200).json({ stops: result.recordset });
             }
             else
-                res.status(400).json({ error: 'No se pudieron obtener las rutas' });
+                res.status(400).json({ error: 'No se pudieron obtener las paradas' });
         })
         .catch(err => {
             res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ error: err.message });
@@ -35,18 +35,31 @@ router.get('/', (req, res) => {
 
 
 router.put('/', (req, res) => {
-    RouteController.updateRoute(req.body)
+    StopController.updateStop(req.body)
         .then(result => {
             if (result.output.success){
                 res.sendStatus(204);
             }
             else
-                res.status(400).json({ error: 'La ruta no existe o no se pudo modificar' });
+                res.status(400).json({ error: 'La parada no existe o no se pudo modificar' });
         })
         .catch(err => {
             res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ error: err.message });
         })
 });
 
+router.delete('/:id', (req, res) => {
+    StopController.deleteStop(req.params)
+        .then(result => {
+            if (result.output.success){
+                res.sendStatus(204);
+            }
+            else
+                res.status(400).json({ error: 'La parada no existe o no se pudo modificar' });
+        })
+        .catch(err => {
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ error: err.message });
+        })
+});
 
 module.exports = router;
