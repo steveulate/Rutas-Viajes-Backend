@@ -7,6 +7,7 @@ var UserRouter = require('./routes/user');
 var RouteRouter = require('./routes/route');
 var StopRouter = require('./routes/stop');
 var TravelRouter = require('./routes/travel');
+var VehicleRouter = require('./routes/vehicle');
 
 var logger = require('morgan');
 
@@ -31,4 +32,5 @@ app.use('/user', UserRouter);
 app.use('/route', RouteRouter);
 app.use('/stop', StopRouter);
 app.use('/travel', TravelRouter);
+app.use('/vehicle', VehicleRouter);
 module.exports = app;
