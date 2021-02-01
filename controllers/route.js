@@ -30,7 +30,7 @@ exports.getRoutes = async (req) => {
     try {
         let pool = await sql.connect(sqlconfig);
         let result = await pool.request()
-            .input('id', sql.Int, !req.id ? null : req.id)
+            .input('id', sql.Int, !req.id ? 0 : req.id)
             .execute('getRoutes');
         sql.close();
         return result;
