@@ -57,6 +57,7 @@ exports.updateRoute = async (req) => {
             .input('precioRuta', sql.Float, req.precioRuta)
             .input('kilometraje', sql.Int, req.kilometraje)
             .input('idAuto', sql.Int, req.idAuto)
+            .input('isActive', sql.Bit, req.isActive)
             .output('success', sql.Bit, 0)
             .execute('updateRoute');
         sql.close();
