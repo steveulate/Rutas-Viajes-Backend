@@ -53,7 +53,7 @@ exports.updateRoute = async (req) => {
             .input('puntoDestinoLAT', sql.Float, req.puntoDestinoLAT)
             .input('puntoDestinoLNG', sql.Float, req.puntoDestinoLNG)
             .input('horarioSalida', sql.DateTime, req.horarioSalida)
-            .input('tiempoLlegada', sql.Time, req.tiempoLlegada)
+            .input('tiempoLlegada', sql.Int, req.tiempoLlegada)
             .input('precioRuta', sql.Float, req.precioRuta)
             .input('kilometraje', sql.Float, req.kilometraje)
             .input('idAuto', sql.Int, req.idAuto)
