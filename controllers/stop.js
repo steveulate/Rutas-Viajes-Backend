@@ -23,7 +23,7 @@ exports.getStops = async (req) => {
     try {
         let pool = await sql.connect(sqlconfig);
         let result = await pool.request()
-            .input('filter', sql.VarChar(30), !req.filter ? null : req.filter)
+            .input('id', sql.Int, !req.id ? null : req.id)
             .execute('getStops');
         sql.close();
         return result;
