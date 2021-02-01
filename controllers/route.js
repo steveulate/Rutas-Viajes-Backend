@@ -13,7 +13,7 @@ exports.addRoute = async (req) => {
             .input('horarioSalida', sql.DateTime, req.horarioSalida)
             .input('tiempoLlegada', sql.Int, req.tiempoLlegada)
             .input('precioRuta', sql.Float, req.precioRuta)
-            .input('kilometraje', sql.Int, req.kilometraje)
+            .input('kilometraje', sql.Float, req.kilometraje)
             .input('idAuto', sql.Int, req.idAuto)
             .output('success', sql.Bit, 0)
             .execute('addRoute');
