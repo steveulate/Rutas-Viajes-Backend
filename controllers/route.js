@@ -46,6 +46,7 @@ exports.updateRoute = async (req) => {
     try {
         let pool = await sql.connect(sqlconfig);
         let result = await pool.request()
+            .input('id', sql.Int, req.id)
             .input('nombre', sql.VarChar(45), !req.nombre ? null : req.nombre)
             .input('puntoOrigenLAT', sql.Float, !req.puntoOrigenLAT ? null : req.puntoOrigenLAT)
             .input('puntoOrigenLNG', sql.Float, !req.puntoOrigenLNG ? null : req.puntoOrigenLNG)
