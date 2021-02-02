@@ -9,6 +9,7 @@ exports.addTravel = async (req) => {
             .output('success', sql.Bit, 0)
             .execute('addTravel');
         sql.close();
+        console.log(result);
         return result;
     }
     catch (excepcion) {
@@ -27,6 +28,24 @@ exports.updateTravel = async (req) => {
             .input('fecha', sql.DateTime, !req.fecha ? null : req.fecha)
             .output('success', sql.Bit, 0)
             .execute('updateTravel');
+        sql.close();
+        return result;
+    }
+    catch (excepcion) {
+        sql.close();
+        throw excepcion;
+    }
+}
+
+exports.updateUserTravel = async (req) => {
+    try {
+        let pool = await sql.connect(sqlconfig);
+        let result = await pool.request()
+            .input('idUsuario', sql.Int, req.idUsuario)
+            .input('isActive', sql.Bit, req.isActive)
+            .input('idViaje', sql.DateTime, req.idViaje)
+            .output('success', sql.Bit, 0)
+            .execute('updateUserTravel');
         sql.close();
         return result;
     }

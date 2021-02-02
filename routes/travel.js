@@ -59,6 +59,21 @@ router.get('/', (req, res) => {
         })
 });
 
+
+router.put('/userTravel', (req, res) => {
+    TravelController.updateUserTravel(req.body)
+        .then(result => {
+            if (result.output.success){
+                res.sendStatus(204);
+            }
+            else
+                res.status(400).json({ error: 'El viaje o el usuario no existen o no se pudo modificar' });
+        })
+        .catch(err => {
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ error: err.message });
+        })
+});
+
 router.get('/:id', (req, res) => {
     TravelController.getTravel(req.params)
         .then(result => {
