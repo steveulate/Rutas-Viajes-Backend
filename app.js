@@ -9,6 +9,8 @@ var StopRouter = require('./routes/stop');
 var TravelRouter = require('./routes/travel');
 var VehicleRouter = require('./routes/vehicle');
 
+var EventRouter = require('./routes/event');
+
 var logger = require('morgan');
 
 var app = express();
@@ -33,4 +35,5 @@ app.use('/route', RouteRouter);
 app.use('/stop', StopRouter);
 app.use('/travel', TravelRouter);
 app.use('/vehicle', VehicleRouter);
+app.use('/event', EventRouter);
 module.exports = app;

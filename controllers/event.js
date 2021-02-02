@@ -1,15 +1,16 @@
 var sql = require('mssql');
 var sqlconfig = require('../config/envconfig').database;
 
-
-exports.login = async (req) => {
+exports.addEvent = async (req) => {
     try {
         let pool = await sql.connect(sqlconfig);
         let result = await pool.request()
-            .input("correo", sql.VarChar(100), req.correo)
-            .input("contraseña", sql.VarChar(30), req.contraseña)
+            .input('nombre', sql.VarChar(30), req.nombre)
+            .input('descripcion', sql.Int, req.descripcion)
+            .input('idViaje', sql.Bit, req.idViaje)
+            .input('cambiarRuta', sql.Bit, req.cambiarRuta)
             .output('success', sql.Bit, 0)
-            .execute('log_In');
+            .execute('addEvent');
         sql.close();
         return result;
     }
@@ -18,14 +19,14 @@ exports.login = async (req) => {
         throw excepcion;
     }
 }
-exports.getUsersByTravel = async (req) => {
+
+exports.getEventsByTravel = async (req) => {
     try {
         let pool = await sql.connect(sqlconfig);
         let result = await pool.request()
-            .input('id', sql.Int, !req.id ? null : req.id)
-            .execute('getUsersByTravel');
+            .input('id', sql.VarChar(30), !req.id ? null : req.id)
+            .execute('getEventsByTravel');
         sql.close();
-        
         return result;
     }
     catch (excepcion) {
@@ -33,3 +34,4 @@ exports.getUsersByTravel = async (req) => {
         throw excepcion;
     }
 }
+
