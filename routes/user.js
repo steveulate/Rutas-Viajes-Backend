@@ -18,7 +18,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    TravelController.getTravel(req.params)
+    UserController.getUsersByTravel(req.params)
         .then(result => {
             if (result.recordset != null){
                 res.status(200).json({ users: result.recordset });
