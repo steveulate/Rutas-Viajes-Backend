@@ -43,7 +43,7 @@ exports.updateUserTravel = async (req) => {
         let result = await pool.request()
             .input('idUsuario', sql.Int, req.idUsuario)
             .input('isActive', sql.Bit, req.isActive)
-            .input('idViaje', sql.DateTime, req.idViaje)
+            .input('idViaje', sql.Int, req.idViaje)
             .output('success', sql.Bit, 0)
             .execute('updateUserTravel');
         sql.close();
