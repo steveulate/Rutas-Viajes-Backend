@@ -18,3 +18,17 @@ exports.login = async (req) => {
         throw excepcion;
     }
 }
+exports.getUsersByTravel = async (req) => {
+    try {
+        let pool = await sql.connect(sqlconfig);
+        let result = await pool.request()
+            .input('id', sql.Int, !req.id ? null : req.id)
+            .execute('getUsersByTravel');
+        sql.close();
+        return result;
+    }
+    catch (excepcion) {
+        sql.close();
+        throw excepcion;
+    }
+}

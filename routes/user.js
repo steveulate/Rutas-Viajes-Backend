@@ -17,4 +17,17 @@ router.post('/', (req, res) => {
         })
 });
 
+router.get('/:id', (req, res) => {
+    TravelController.getTravel(req.params)
+        .then(result => {
+            if (result.recordset != null){
+                res.status(200).json({ users: result.recordset });
+            }
+            else
+                res.status(400).json({ error: 'No se pudieron obtener los usuarios' });
+        })
+        .catch(err => {
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ error: err.message });
+        })
+});
 module.exports = router;
