@@ -5,10 +5,10 @@ exports.addEvent = async (req) => {
     try {
         let pool = await sql.connect(sqlconfig);
         let result = await pool.request()
-            .input('nombre', sql.VarChar(50), req.nombre)
+            .input('cambiarRuta', sql.Bit, req.cambiarRuta)
             .input('descripcion', sql.VarChar(100), req.descripcion)
             .input('idViaje', sql.Int, req.idViaje)
-            .input('cambiarRuta', sql.Bit, req.cambiarRuta)
+            .input('nombre', sql.VarChar(50), req.nombre)
             .output('success', sql.Bit, 0)
             .execute('addEvent');
         sql.close();
