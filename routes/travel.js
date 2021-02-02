@@ -33,5 +33,31 @@ router.get('/', (req, res) => {
         })
 });
 
+router.get('/', (req, res) => {
+    TravelController.getTravels(req.query)
+        .then(result => {
+            if (result.recordset != null){
+                res.status(200).json({ travels: result.recordset });
+            }
+            else
+                res.status(400).json({ error: 'No se pudieron obtener los viajes' });
+        })
+        .catch(err => {
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ error: err.message });
+        })
+});
 
+router.get('/:id', (req, res) => {
+    TravelController.getTravel(req.params)
+        .then(result => {
+            if (result.recordset != null){
+                res.status(200).json({ travel: result.recordset });
+            }
+            else
+                res.status(400).json({ error: 'No se pudieron obtener los viajes' });
+        })
+        .catch(err => {
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ error: err.message });
+        })
+});
 module.exports = router;
