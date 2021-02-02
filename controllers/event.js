@@ -9,6 +9,7 @@ exports.addEvent = async (req) => {
             .input('descripcion', sql.VarChar(100), req.descripcion)
             .input('idViaje', sql.Int, req.idViaje)
             .input('nombre', sql.VarChar(50), req.nombre)
+            .input('hora',sql.DateTime, req.hora)
             .output('success', sql.Bit, 0)
             .execute('addEvent');
         sql.close();
