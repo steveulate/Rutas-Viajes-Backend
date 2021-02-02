@@ -5,9 +5,9 @@ exports.addEvent = async (req) => {
     try {
         let pool = await sql.connect(sqlconfig);
         let result = await pool.request()
-            .input('nombre', sql.VarChar(30), req.nombre)
-            .input('descripcion', sql.Int, req.descripcion)
-            .input('idViaje', sql.Bit, req.idViaje)
+            .input('nombre', sql.VarChar(50), req.nombre)
+            .input('descripcion', sql.VarChar(100), req.descripcion)
+            .input('idViaje', sql.Int, req.idViaje)
             .input('cambiarRuta', sql.Bit, req.cambiarRuta)
             .output('success', sql.Bit, 0)
             .execute('addEvent');
