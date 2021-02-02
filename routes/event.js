@@ -7,7 +7,7 @@ router.post('/', (req, res) => {
     EventController.addEvent(req.body)
         .then(result => {
             if (result.output.success){
-                res.sendStatus(201);
+                res.status(200).json({});
             }
             else
                 res.status(400).json({ error: 'Couldnt add an event' });
