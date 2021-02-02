@@ -18,7 +18,19 @@ router.post('/', (req, res) => {
         })
 });
 
-
+router.put('/', (req, res) => {
+    TravelController.updateTravel(req.body)
+        .then(result => {
+            if (result.output.success){
+                res.sendStatus(204);
+            }
+            else
+                res.status(400).json({ error: 'El viaje no existe o no se pudo modificar' });
+        })
+        .catch(err => {
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ error: err.message });
+        })
+});
 router.get('/', (req, res) => {
     TravelController.getTravels(req.query)
         .then(result => {

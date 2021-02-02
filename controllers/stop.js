@@ -42,7 +42,7 @@ exports.updateStop = async (req) => {
             .input('id', sql.Int, req.id)
             .input('idRuta', sql.Int, !req.idRuta ? null : req.idRuta)
             .input('LAT', sql.Float, !req.LAT ? null : req.LAT)
-            .input('LNG', sql.Float, !eq.LNG ? null : req.LNG)
+            .input('LNG', sql.Float, !req.LNG ? null : req.LNG)
             .output('success', sql.Bit, 0)
             .execute('updateStop');
         sql.close();

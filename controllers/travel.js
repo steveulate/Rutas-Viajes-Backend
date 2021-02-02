@@ -17,6 +17,26 @@ exports.addTravel = async (req) => {
     }
 }
 
+exports.updateTravel = async (req) => {
+    try {
+        let pool = await sql.connect(sqlconfig);
+        let result = await pool.request()
+            .input('id', sql.Int, req.id)
+            .input('idRuta', sql.Int, !req.idRuta ? null : req.idRuta)
+            .input('isActive', sql.Bit, !req.isActive ? null : req.isActive)
+            .input('fecha', sql.DateTime, !req.fecha ? null : req.fecha)
+            .output('success', sql.Bit, 0)
+            .execute('updateTravel');
+        sql.close();
+        return result;
+    }
+    catch (excepcion) {
+        sql.close();
+        throw excepcion;
+    }
+}
+
+
 //Manda id de la ruta y devuelve los viajes relacionados con esa ruta
 exports.getTravels = async (req) => {
     try {
